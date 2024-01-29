@@ -504,7 +504,6 @@ a:hover {
     margin: 7px 0;
     animation: slide-in ease 0.5s;
 }
-
 @keyframes slide-in {
     0% {
         transform: translateX(40px);

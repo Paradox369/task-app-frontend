@@ -14,7 +14,7 @@ const Task = ({ task, index, deleteTask, getSingleTask, setToComplete }) => {
                     <b>author:</b> <i> {task.author}</i>
                 </p>
                 <p style={{ marginLeft: "1rem", fontSize: "1.25rem" }}>
-                    <b>date issued: </b>{" "}
+                    <b>date issued: </b>
                     {formatDistanceToNow(task.updatedAt, { addSuffix: true })}
                 </p>
             </div>
