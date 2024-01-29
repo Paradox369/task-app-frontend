@@ -12,15 +12,22 @@ const TaskList = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
+        author: "",
         completed: false,
     });
     const [isEditing, setIsEditing] = useState(false);
     const [taskID, setTaskID] = useState("");
 
-    const { name } = formData;
+    const { name, author } = formData;
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+    };
+    const handleAuthorChange = (e) => {
+        if (e.target.value === "") {
+            setFormData({ ...formData, author: "anonymous" });
+        }
+        setFormData({ ...formData, author: e.target.value });
     };
 
     const getTasks = async () => {
@@ -64,7 +71,7 @@ const TaskList = () => {
     };
 
     const getSingleTask = async (task) => {
-        setFormData({ name: task.name, completed: false });
+        setFormData({ name: task.name, author: task.author, completed: false });
         setTaskID(task._id);
         setIsEditing(true);
     };
@@ -74,7 +81,7 @@ const TaskList = () => {
         if (name === "") return toast.error("enter a task there!");
         try {
             await axios.patch(`${URL}/api/tasks/${taskID}`, formData);
-            setFormData({ ...formData, name: "" });
+            setFormData({ ...formData, name: "", author: "" });
             setIsEditing(false);
             getTasks();
         } catch (error) {
@@ -102,10 +109,12 @@ const TaskList = () => {
 
     return (
         <div>
-            <h2>task manager</h2>
+            <h2>everyone's task manager</h2>
             <TaskForm
                 name={name}
+                author={author}
                 handleInputChange={handleInputChange}
+                handleAuthorChange={handleAuthorChange}
                 createTask={createTask}
                 isEditing={isEditing}
                 updateTask={updateTask}

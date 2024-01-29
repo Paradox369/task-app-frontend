@@ -4,10 +4,15 @@ import { FaEdit, FaCheckDouble, FaRegTrashAlt } from "react-icons/fa";
 const Task = ({ task, index, deleteTask, getSingleTask, setToComplete }) => {
     return (
         <div className={task.completed ? "task completed" : "task"}>
-            <p>
-                <b>{index + 1}. </b>
-                {task.name}
-            </p>
+            <div>
+                <p>
+                    <b>{index + 1}. </b>
+                    {task.name}
+                </p>
+                <p style={{ marginLeft: "1rem" }}>
+                    <b>author:</b> {task.author}
+                </p>
+            </div>
             <div className="task-icons">
                 <FaCheckDouble
                     color="green"
